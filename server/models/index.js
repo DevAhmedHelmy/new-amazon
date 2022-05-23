@@ -27,6 +27,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.users = require("../models/user")(sequelize, DataTypes);
+db.categpries = require("../models/category")(sequelize, DataTypes);
+db.products = require("../models/product")(sequelize, DataTypes);
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and Resync with { force: false }");

@@ -13,9 +13,15 @@ app.use(express.json());
 
  // user routes and use them
 const userRoutes = require("./routes/user");
-app.use("/api/users", userRoutes);
+const productRoutes = require("./routes/product");
+const categoryRoutes = require("./routes/category");
+const authRotues = require("./routes/auth");
 
- 
+
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/auth", authRotues);
  
 
 const PORT = process.env.PORT || 3000;
