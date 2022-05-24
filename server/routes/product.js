@@ -3,8 +3,8 @@ const router = require("express").Router();
 
 
 router.get("/", productController.getProducts);
-router.get("/:id", productController.getProductById);
 router.post("/add", productController.addProduct);
+router.get("/:id", productController.getProductById);
 router.put("/:id", productController.updateProductById);
 router.delete("/:id", productController.deleteProductById);
 

@@ -31,7 +31,6 @@ const register = (req, res) => {
 
 const login = (req, res) => {
   const { email, password } = req.body;
-
   db.users
     .findOne({
       where: {
@@ -48,12 +47,20 @@ const login = (req, res) => {
           message: "Auth successful",
           token,
         });
-      } else {
-        res.sendStatus(401);
       }
     })
     .catch((err) => {
-      res.status(500).send(err);
+      if (err instanceof NotFoundError) {
+        res.status(401).send(`Mobile/Email or Password is wrong`);
+      } else {
+        let error_data = {
+          entity: "User",
+          model_obj: { param: req.params, body: req.body },
+          error_obj: err,
+          error_msg: err.message,
+        };
+        res.status(500).send("Error retrieving User");
+      }
     });
 };
 
