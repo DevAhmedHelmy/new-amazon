@@ -39,16 +39,15 @@ const login = (req, res) => {
       },
     })
     .then((user) => {
-        if (user && bcrypt.compareSync(password.toString(), user.password)) {
-            let token = jwt.sign({ user: user }, process.env.SECRET_KEY, {
-                expiresIn: "1h",
-            });
-            res.status(200).json({
-              user,
-              message: "Auth successful",
-              token
-            });
-         
+      if (user && bcrypt.compareSync(password.toString(), user.password)) {
+        let token = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+          expiresIn: "1h",
+        });
+        res.status(200).json({
+          user,
+          message: "Auth successful",
+          token,
+        });
       } else {
         res.sendStatus(401);
       }
